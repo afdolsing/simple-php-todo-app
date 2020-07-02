@@ -4,9 +4,16 @@
     if(isset($_POST['save'])){
         $todo = $_POST['todo'];
         $date = date('l, d F Y');
-        $sql = "INSERT INTO tbl_list(name, date) VALUES('$todo','$date')";
 
-        $result = mysqli_query($connection, $sql);  
+        // jika field kosong maka error
+        if(empty($todo)){
+            $error = "field is required";
+        }else{
+            $sql = "INSERT INTO tbl_list(name, date) VALUES('$todo','$date')";
+
+            $result = mysqli_query($connection, $sql); 
+        }
+         
     }
 
     if(isset($_GET['delete_id'])){
@@ -30,11 +37,16 @@
         <div class="todo">
             <h2>PHP Todo App</h2>
             <div>
-                <br>
                 <form action="" method="POST">
                     <div class="form-group">
-                        <input type="text" name="todo" class="form-control" placeholder="Todo name" required>
+                        <input type="text" name="todo" class="form-control" placeholder="Todo name">
                     </div>
+                        <?php
+                            // tampilkan error jika field blm diisi
+                            if(isset($error)){
+                                echo "<div class='alert alert-danger'>$error</div>";
+                            }
+                         ?>
                     <div class="form-group">
                         <button name='save' class="btn btn-block btn-success">Add a new todo</button>
                     </div>
