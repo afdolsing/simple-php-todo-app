@@ -9,16 +9,21 @@
         if(empty($todo)){
             $error = "field is required";
         }else{
-            $sql = "INSERT INTO tbl_list(name, date) VALUES('$todo','$date')";
+            //jika ada maka masukkan ke database
+            $sql = "INSERT INTO tbl_todo(name, date) VALUES('$todo','$date')";
 
-            $result = mysqli_query($connection, $sql); 
+            $result = mysqli_query($connection, $sql);
+            
+            if($result){
+                $success = "Todo Success Added";
+            }
         }
          
     }
 
     if(isset($_GET['delete_id'])){
         $delete_todo = $_GET['delete_id'];
-        $sql = "DELETE FROM tbl_list WHERE id = $delete_todo";
+        $sql = "DELETE FROM tbl_todo WHERE id = $delete_todo";
         $result = mysqli_query($connection, $sql);
     }
 ?>
@@ -41,15 +46,17 @@
                     <div class="form-group">
                         <input type="text" name="todo" class="form-control" placeholder="Todo name">
                     </div>
-                        <?php
-                            // tampilkan error jika field blm diisi
-                            if(isset($error)){
-                                echo "<div class='alert alert-danger'>$error</div>";
-                            }
-                         ?>
                     <div class="form-group">
                         <button name='save' class="btn btn-block btn-success">Add a new todo</button>
                     </div>
+                        <?php 
+                            if(isset($success)){
+                                echo "<div class='alert alert-success'>$success</div>";
+                            }else if(isset($error)){ 
+                                // tampilkan error jika field blm diisi
+                                echo "<div class='alert alert-danger'>$error</div>";
+                            }
+                        ?>
                 </form>
             </div>
             <div class="table-responsive">
@@ -62,7 +69,7 @@
                     </thead>
                     <tbody>
                         <?php 
-                            $query = "SELECT * FROM tbl_list";
+                            $query = "SELECT * FROM tbl_todo";
                             $result = mysqli_query($connection, $query);
 
                             $no = 1;
