@@ -15,7 +15,7 @@
             $result = mysqli_query($connection, $sql);
             
             if($result){
-                $success = "Todo Success Added";
+                $success = "Successfully added";
             }
         }
          
