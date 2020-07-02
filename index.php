@@ -6,6 +6,12 @@
         $date = date('l, d F Y');
         $sql = "INSERT INTO tbl_list(name, date) VALUES('$todo','$date')";
 
+        $result = mysqli_query($connection, $sql);  
+    }
+
+    if(isset($_GET['delete_id'])){
+        $delete_todo = $_GET['delete_id'];
+        $sql = "DELETE FROM tbl_list WHERE id = $delete_todo";
         $result = mysqli_query($connection, $sql);
     }
 ?>
@@ -15,7 +21,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Simple Todo App</title>
 
 </head>
@@ -24,10 +30,10 @@
         <div class="todo">
             <h2>PHP Todo App</h2>
             <div>
-                <label>Add a new todo</label>
+                <br>
                 <form action="" method="POST">
                     <div class="form-group">
-                        <input type="text" name="todo" class="form-control" placeholder="Todo name">
+                        <input type="text" name="todo" class="form-control" placeholder="Todo name" required>
                     </div>
                     <div class="form-group">
                         <button name='save' class="btn btn-block btn-success">Add a new todo</button>
@@ -57,7 +63,7 @@
                             <td><?= $name; ?></td>
                             <td><?= $date; ?></td>
                             <td>
-                                <a href="delete.php?id=<?php echo $row['id'] ?>" class="btn btn-sm btn-danger">FINISH</a>
+                                <a href="index.php?delete_id=<?php echo $row['id'] ?>" class="btn btn-sm btn-danger">FINISH</a>
                             </td>
                         </tr>
                         <?php endwhile;
