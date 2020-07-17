@@ -76,7 +76,7 @@
                             while ($row = mysqli_fetch_array($result)):
                                 $name = $row['name'];
                                 $date = $row['date'];
-                        ?>
+                            ?>
                         <tr>
                             <td><?= $no++; ?></td>
                             <td><?= $name; ?></td>
@@ -85,7 +85,7 @@
                                 <a href="index.php?delete_id=<?php echo $row['id'] ?>" class="btn btn-sm btn-danger">FINISH</a>
                             </td>
                         </tr>
-                        <?php endwhile;
+                            <?php endwhile;
                         ?>
                     </tbody>
                 </table>
