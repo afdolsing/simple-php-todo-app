@@ -1,5 +1,5 @@
 <?php
-    // definisikan variabel konstanta
+    // definisikan variabel konstanta dengan define
     define('DB_HOST','localhost');
     define('DB_USER','root');
     define('DB_PASS','');

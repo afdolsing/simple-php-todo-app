@@ -1,5 +1,5 @@
 <?php
-    include "connection.php";
+    require_once "connection.php";
 
     if(isset($_POST['save'])){
         $todo = $_POST['todo'];
@@ -20,7 +20,7 @@
         }
          
     }
-
+    // Hapus todo
     if(isset($_GET['delete_id'])){
         $delete_todo = $_GET['delete_id'];
         $sql = "DELETE FROM tbl_todo WHERE id = $delete_todo";
@@ -82,6 +82,7 @@
                             <td><?= $name; ?></td>
                             <td><?= $date; ?></td>
                             <td>
+                                <!-- kirim id yang di hapus menggunakan query string (?) -->
                                 <a href="index.php?delete_id=<?php echo $row['id'] ?>" class="btn btn-sm btn-danger">FINISH</a>
                             </td>
                         </tr>
